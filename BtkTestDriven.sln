@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers.Tests", "Helpers.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{9F6DDF73-3109-4C57-B826-6120D8090601}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart", "ShoppingCart\ShoppingCart.csproj", "{C6A57CBD-EA76-4296-944B-C93E5F47205E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartTests", "ShoppingCartTests\ShoppingCartTests.csproj", "{FC989A9A-7E2F-4681-A5A0-4473EF0E6C3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{9F6DDF73-3109-4C57-B826-6120D8090601}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F6DDF73-3109-4C57-B826-6120D8090601}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F6DDF73-3109-4C57-B826-6120D8090601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6A57CBD-EA76-4296-944B-C93E5F47205E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6A57CBD-EA76-4296-944B-C93E5F47205E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6A57CBD-EA76-4296-944B-C93E5F47205E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6A57CBD-EA76-4296-944B-C93E5F47205E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC989A9A-7E2F-4681-A5A0-4473EF0E6C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC989A9A-7E2F-4681-A5A0-4473EF0E6C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC989A9A-7E2F-4681-A5A0-4473EF0E6C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC989A9A-7E2F-4681-A5A0-4473EF0E6C3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
