@@ -5,25 +5,31 @@ namespace ShoppingCart.Tests
     [TestClass()]
     public class CartManagerTests
     {
-        
-        [TestMethod()]
-        public void Sepete_urun_eklene_bilmelidir()
-        {
-            // Arrange 
-            const int beklenen = 1; // sepette ürün yok oyüzden ilk ekleme de beklenen
+        CartManager cartManager;
+        CartItem cartItem;
 
-            var cartManager = new CartManager();
-            var cartItem = new CartItem
+        [TestInitialize]
+        public void KurulumTest()
+        {
+            cartManager = new CartManager();
+            cartItem = new CartItem
             {
                 Product = new Product
                 {
                     Id = 1,
                     Name = "Laptop",
-                    UnitPrice= 3000
+                    UnitPrice = 3000
                 },
                 Quantity = 1
             };
+        }
 
+        [TestMethod()]
+        public void Sepete_urun_eklene_bilmelidir()
+        {
+            // Arrange 
+            const int beklenen = 1; // sepette ürün yok oyüzden ilk ekleme de beklenen
+            
             //Act
             cartManager.Ekle(cartItem);
             var toplamElemanSayısı = cartManager.ToplamUrun;
@@ -36,18 +42,7 @@ namespace ShoppingCart.Tests
         public void Seppette_olan_urun_cikarilabilmelidir()
         {
             // Arrange 
-            var cartManager = new CartManager();
-            var cartItem = new CartItem
-            {
-                Product = new Product
-                {
-                    Id = 1,
-                    Name = "Laptop",
-                    UnitPrice = 3000
-                },
-                Quantity = 1
-            };
-
+            
             var beklenenElemanSayisi = cartManager.ToplamUrun;
 
             cartManager.Ekle(cartItem);
@@ -66,18 +61,6 @@ namespace ShoppingCart.Tests
             // Arrange 
             const int beklenenEkle = 1;
             const int beklenen = 0;
-
-            var cartManager = new CartManager();
-            var cartItem = new CartItem
-            {
-                Product = new Product
-                {
-                    Id = 1,
-                    Name = "Laptop",
-                    UnitPrice = 3000
-                },
-                Quantity = 1
-            };
 
             //Act
             cartManager.Ekle(cartItem);
