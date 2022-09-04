@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace ShoppingCart.Tests
 {
@@ -35,7 +36,7 @@ namespace ShoppingCart.Tests
         {
             // Arrange 
             const int beklenen = 1; // sepette ürün yok oyüzden ilk ekleme de beklenen
-            
+
             //Act
             cartManager.Ekle(cartItem);
             var toplamElemanSayısı = cartManager.ToplamUrun;
@@ -45,10 +46,49 @@ namespace ShoppingCart.Tests
         }
 
         [TestMethod()]
+        public void Sepete_urun_eklene_bilmelidir2()
+        {
+            // Arrange 
+            cartManager.Ekle(cartItem);
+            int beklenenToplamEleman = cartManager.ToplamUrun + 2; // sepette ürün yok oyüzden ilk ekleme de beklenen
+            int beklenenUrunCesidi = cartManager.ToplamUrunCesidi + 1;
+            int belkenenUrunMiktari = cartManager.Sepet.FirstOrDefault(
+                i => i.Product.Id == cartItem.Product.Id
+                ).Quantity+1;
+
+            //Act
+            cartManager.Ekle(cartItem);
+            cartManager.Ekle(new CartItem
+            {
+                Product = new Product
+                {
+                    Id = 2,
+                    Name = "Fare",
+                    UnitPrice = 75
+                },
+                Quantity = 1
+            });
+
+            var toplamElemanSayısı = cartManager.ToplamUrun;
+            var toplamUruncesidi = cartManager.ToplamUrunCesidi;
+            var urunMiktari = cartManager.Sepet.FirstOrDefault(
+                i => i.Product.Id == cartItem.Product.Id
+                ).Quantity;
+
+            var toplamElemanSayısı2 = urunMiktari + toplamUruncesidi - 1;
+
+            //Assert
+            Assert.AreEqual(beklenenToplamEleman, toplamElemanSayısı);
+            Assert.AreEqual(beklenenUrunCesidi, toplamUruncesidi);
+            Assert.AreEqual(belkenenUrunMiktari, urunMiktari);
+            Assert.AreEqual(toplamElemanSayısı, toplamElemanSayısı2);
+        }
+
+        [TestMethod()]
         public void Seppette_olan_urun_cikarilabilmelidir()
         {
             // Arrange 
-            
+
             var beklenenElemanSayisi = cartManager.ToplamUrun;
 
             cartManager.Ekle(cartItem);
