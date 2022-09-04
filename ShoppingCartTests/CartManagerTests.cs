@@ -24,6 +24,12 @@ namespace ShoppingCart.Tests
             };
         }
 
+        [TestCleanup]
+        public void Bitimi()
+        {
+            cartManager.temizle();
+        }
+
         [TestMethod()]
         public void Sepete_urun_eklene_bilmelidir()
         {
