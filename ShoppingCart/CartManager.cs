@@ -8,6 +8,9 @@ namespace ShoppingCart
      * 1. Sepete ürün eklene bilmelidir
      * 2. Seppette olan ürün çıkarılabilmelidir
      * 3. Sepet temzilenebilmelidir
+     * 
+     * 4. Sepete aynı ürün eklendiğinde ürün çeşidi aynı kalırken toplam ürün sayısı artmalı
+     * 5. Sepete farklı ürün eklendiğinde ürün çeşidi ve toplam ürün miktarı artmalı
      */
     public class CartManager
     {

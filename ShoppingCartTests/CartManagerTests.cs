@@ -1,16 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
+﻿using ShoppingCart;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ShoppingCart.Tests
 {
     [TestClass()]
     public class CartManagerTests
     {
-        CartManager cartManager;
-        CartItem cartItem;
+        static CartManager cartManager;
+        static CartItem cartItem;
 
-        [TestInitialize]
-        public void KurulumTest()
+        [ClassInitialize]
+        public static void KurulumClass(TestContext testContext)
         {
             cartManager = new CartManager();
             cartItem = new CartItem
@@ -25,98 +25,108 @@ namespace ShoppingCart.Tests
             };
         }
 
-        [TestCleanup]
-        public void Bitimi()
+        [ClassCleanup]
+        public static void BitimClass()
         {
             cartManager.temizle();
         }
 
-        [TestMethod()]
-        public void Sepete_urun_eklene_bilmelidir()
+        //[TestMethod]
+        //public void Sepete_urun_eklene_bilmelidir()
+        //{
+        //    Arrange
+        //    int beklenen = cartManager.ToplamUrun + 1;
+
+        //    Act
+        //    cartManager.Ekle(cartItem);
+        //    var toplamElemanSayısı = cartManager.ToplamUrun;
+
+        //    Assert
+        //    Assert.AreEqual(beklenen, toplamElemanSayısı);
+        //}
+
+
+        //[TestMethod]
+        //public void Seppette_olan_urun_cikarilabilmelidir()
+        //{
+        //    Arrange
+
+        //   var beklenenElemanSayisi = cartManager.ToplamUrun;
+
+        //    cartManager.Ekle(cartItem);
+
+        //    Act
+        //    cartManager.Cikar(cartItem);
+        //    var toplamElemanSayısı = cartManager.ToplamUrun;
+
+        //    Assert
+        //    Assert.AreEqual(beklenenElemanSayisi, toplamElemanSayısı);
+        //}
+
+        //[TestMethod]
+        //public void Sepet_temzilenebilmelidir()
+        //{
+        //    Arrange
+        //    int beklenenEkle = cartManager.ToplamUrun + 1;
+        //    const int beklenen = 0;
+
+        //    Act
+        //    cartManager.Ekle(cartItem);
+        //    var toplamElemanSayısı1 = cartManager.ToplamUrun;
+        //    cartManager.temizle();
+        //    var toplamElemanSayısı = cartManager.ToplamUrun;
+        //    Assert
+        //    Assert.AreEqual(beklenenEkle, toplamElemanSayısı1);
+        //    Assert.AreNotEqual(toplamElemanSayısı, toplamElemanSayısı1);
+        //    Assert.AreEqual(beklenen, toplamElemanSayısı);
+        //}
+
+        [TestMethod]
+        public void Sepete_ayni_urun_eklendgğinde_urun_cesidi_ayni_kalirken_toplam_urun_sayisi_artmali()
         {
-            // Arrange 
-            const int beklenen = 1; // sepette ürün yok oyüzden ilk ekleme de beklenen
-
-            //Act
+            // Arrange
             cartManager.Ekle(cartItem);
-            var toplamElemanSayısı = cartManager.ToplamUrun;
-
-            //Assert
-            Assert.AreEqual(beklenen, toplamElemanSayısı);
+            int toplamUrun;
+            int beklenenToplamUrun = cartManager.ToplamUrun + 1;
+            int toplamUrunCesidi;
+            int beklenenUrunCesidi = cartManager.ToplamUrunCesidi;
+            // Act
+            cartManager.Ekle(cartItem);
+            toplamUrun = cartManager.ToplamUrun;
+            toplamUrunCesidi = cartManager.ToplamUrunCesidi;
+            // Assert
+            Assert.AreEqual(beklenenToplamUrun, toplamUrun);
+            Assert.AreEqual(beklenenUrunCesidi, toplamUrunCesidi);
         }
 
-        [TestMethod()]
-        public void Sepete_urun_eklene_bilmelidir2()
+
+        [TestMethod]
+        public void Sepete_farkli_urun_eklendiginde_urun_cesidi_ve_toplam_urun_miktari_artmali()
         {
-            // Arrange 
+            // Arrange
             cartManager.Ekle(cartItem);
-            int beklenenToplamEleman = cartManager.ToplamUrun + 2; // sepette ürün yok oyüzden ilk ekleme de beklenen
+            int toplamUrun;
+            int beklenenToplamUrun = cartManager.ToplamUrun + 1;
+            int toplamUrunCesidi;
             int beklenenUrunCesidi = cartManager.ToplamUrunCesidi + 1;
-            int belkenenUrunMiktari = cartManager.Sepet.FirstOrDefault(
-                i => i.Product.Id == cartItem.Product.Id
-                ).Quantity+1;
 
-            //Act
-            cartManager.Ekle(cartItem);
-            cartManager.Ekle(new CartItem
-            {
-                Product = new Product
+            // Act
+            cartManager.Ekle(
+                new CartItem
                 {
-                    Id = 2,
-                    Name = "Fare",
-                    UnitPrice = 75
-                },
-                Quantity = 1
-            });
-
-            var toplamElemanSayısı = cartManager.ToplamUrun;
-            var toplamUruncesidi = cartManager.ToplamUrunCesidi;
-            var urunMiktari = cartManager.Sepet.FirstOrDefault(
-                i => i.Product.Id == cartItem.Product.Id
-                ).Quantity;
-
-            var toplamElemanSayısı2 = urunMiktari + toplamUruncesidi - 1;
-
-            //Assert
-            Assert.AreEqual(beklenenToplamEleman, toplamElemanSayısı);
-            Assert.AreEqual(beklenenUrunCesidi, toplamUruncesidi);
-            Assert.AreEqual(belkenenUrunMiktari, urunMiktari);
-            Assert.AreEqual(toplamElemanSayısı, toplamElemanSayısı2);
-        }
-
-        [TestMethod()]
-        public void Seppette_olan_urun_cikarilabilmelidir()
-        {
-            // Arrange 
-
-            var beklenenElemanSayisi = cartManager.ToplamUrun;
-
-            cartManager.Ekle(cartItem);
-
-            //Act
-            cartManager.Cikar(cartItem);
-            var toplamElemanSayısı = cartManager.ToplamUrun;
-
-            //Assert
-            Assert.AreEqual(beklenenElemanSayisi, toplamElemanSayısı);
-        }
-
-        [TestMethod()]
-        public void Sepet_temzilenebilmelidir()
-        {
-            // Arrange 
-            const int beklenenEkle = 1;
-            const int beklenen = 0;
-
-            //Act
-            cartManager.Ekle(cartItem);
-            var toplamElemanSayısı1 = cartManager.ToplamUrun;
-            cartManager.temizle();
-            var toplamElemanSayısı = cartManager.ToplamUrun;
-            //Assert
-            Assert.AreEqual(beklenenEkle, toplamElemanSayısı1);
-            Assert.AreNotEqual(toplamElemanSayısı, toplamElemanSayısı1);
-            Assert.AreEqual(beklenen, toplamElemanSayısı);
+                    Product = new Product
+                    {
+                        Id = 2,
+                        Name = "Fare",
+                        UnitPrice = 100
+                    },
+                    Quantity = 1,
+                });
+            toplamUrun = cartManager.ToplamUrun;
+            toplamUrunCesidi = cartManager.ToplamUrunCesidi;
+            // Assert
+            Assert.AreEqual(beklenenToplamUrun, toplamUrun);
+            Assert.AreEqual(beklenenUrunCesidi, toplamUrunCesidi);
         }
 
     }
