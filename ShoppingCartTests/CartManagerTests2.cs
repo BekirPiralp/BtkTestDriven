@@ -36,7 +36,7 @@ namespace ShoppingCartTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))] //hata veriri çünkü kalıtım ile glene özellikleri devreye almıyor
+        [ExpectedException(typeof(Exception),AllowDerivedTypes =true)] //kalıtım ile gelen özellikler devreye alındı
         public void Sepete_Ayni_Urun_Ikinci_Defa_Ekelenemez_OzelEkle2()
         {
             cartManager.OzelEkle(cartItem);
