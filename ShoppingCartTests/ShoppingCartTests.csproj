@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="CartManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CartManagerTests2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

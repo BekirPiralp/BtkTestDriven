@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ShoppingCart
@@ -11,6 +12,8 @@ namespace ShoppingCart
      * 
      * 4. Sepete aynı ürün eklendiğinde ürün çeşidi aynı kalırken toplam ürün sayısı artmalı
      * 5. Sepete farklı ürün eklendiğinde ürün çeşidi ve toplam ürün miktarı artmalı
+     * 
+     * 6. Sepete aynı ürün ikincidefe ekelenemez ozelEkle metodu için
      */
     public class CartManager
     {
@@ -39,6 +42,25 @@ namespace ShoppingCart
                 }
             }
 
+        }
+
+        public void OzelEkle(CartItem Urun)
+        {
+            if (Urun != null && Urun.Product != null)
+            {
+                if (Urun.Quantity <= 0)
+                    Urun.Quantity = 1;
+
+                var urunListe = _sepet.FirstOrDefault(i => i.Product.Id == Urun.Product.Id);
+                if (urunListe != null)
+                {
+                    throw new ArgumentException("Sepette aynı ürün bulunmaktadır.");
+                }
+                else
+                {
+                    _sepet.Add(Urun);
+                }
+            }
         }
 
         public void Cikar(CartItem Urun)
