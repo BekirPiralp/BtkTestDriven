@@ -70,6 +70,13 @@ namespace Asserts.Tests
             Assert.AreSame(sayilar, diğerSayılar); // referansları eşit
             //Assert.AreNotSame(sayilar, diğerSayılar, "İkisinide referansları eşittir");
         }
+
+        [TestMethod]
+        public void TestMEthodBaşarılıLakinYeterliDeğil()
+        {
+            Assert.AreEqual(1, 1); //Eşit olduğu için test başarılı bunun yerine kendi tezleriniz.
+            Assert.Inconclusive("Bu test artık yerli değildir.");
+        }
         
     }
 
