@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 
 namespace Asserts.Tests
 {
@@ -52,5 +53,41 @@ namespace Asserts.Tests
 
         }
 
+        [TestMethod]
+        public void TestMethodReferanslarEşitmi()
+        {
+            //Hazırlık
+            Byte[] sayilar = new byte[] {1,2,3};
+
+            //Eylem
+            var diğerSayılar = sayilar;
+            sayilar[0] = 4;
+
+            Console.WriteLine(sayilar.convertString());
+            Console.WriteLine(diğerSayılar.convertString());
+
+            //Tez
+            Assert.AreSame(sayilar, diğerSayılar); // referansları eşit
+            //Assert.AreNotSame(sayilar, diğerSayılar, "İkisinide referansları eşittir");
+        }
+        
     }
+
+    internal static class ExtensionMy {
+        public static string convertString(this Byte[] bytes)
+        {
+            string result = "{ ";
+            foreach(Byte b in bytes)
+            {
+                result += b.ToString() + " , ";
+            }
+
+            result=result.Substring(0, result.Length - 2);
+
+            result += "}";
+
+            return result;
+        }
+    }
+        
 }
