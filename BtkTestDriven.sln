@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asserts.Tests", "Asserts.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringAsserts", "StringAsserts\StringAsserts.csproj", "{79F7F79F-70EC-41FC-8A94-86293268DEC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextContextTests", "TextContextTests\TextContextTests.csproj", "{565C5617-77BF-4F1B-9419-C138D42FADF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{79F7F79F-70EC-41FC-8A94-86293268DEC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79F7F79F-70EC-41FC-8A94-86293268DEC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79F7F79F-70EC-41FC-8A94-86293268DEC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{565C5617-77BF-4F1B-9419-C138D42FADF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{565C5617-77BF-4F1B-9419-C138D42FADF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{565C5617-77BF-4F1B-9419-C138D42FADF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{565C5617-77BF-4F1B-9419-C138D42FADF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
