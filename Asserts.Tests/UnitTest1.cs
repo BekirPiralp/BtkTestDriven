@@ -148,6 +148,50 @@ namespace Asserts.Tests
 
         }
 
+        [TestMethod]
+        public void ListedeNullYokMU()
+        {
+            //tez
+            CollectionAssert.AllItemsAreNotNull(_kulanıcılar);
+            //null var ise testten geçemez
+        }
+
+        [TestMethod]
+        public void ListeElemanlarıBenzersizMi()
+        {
+            //Tez
+            CollectionAssert.AllItemsAreUnique(_kulanıcılar);
+        }
+
+        [TestMethod]
+        public void ListeElemanlarıAynıTipteOlmalıdır()
+        {
+            //Tez
+            CollectionAssert.AllItemsAreInstancesOfType(_kulanıcılar,typeof(string));
+        }
+
+
+        [TestMethod]
+        public void AltKümesiMi()
+        {
+            //Hazırlık
+            List<string> yeniKullanicilar = new List<string>() { "Salih", "Engin" };
+            List<string> eskiKullanıcılar = new List<string>() { "Salih", "Cevdet" };
+
+            //Tez
+            CollectionAssert.IsSubsetOf(yeniKullanicilar, _kulanıcılar); 
+            //yeniKullanıcılar kullanıcıların alt kümesi mi
+            CollectionAssert.IsNotSubsetOf(eskiKullanıcılar, _kulanıcılar);
+            // eski kullanıcılar kullanıcıların alt kümesideğil mi
+        }
+
+        [TestMethod]
+        public void ListedeVarMı()
+        {
+            //Tez
+            CollectionAssert.Contains(_kulanıcılar, "Salih");
+            CollectionAssert.DoesNotContain(_kulanıcılar, "Cevdet");
+        }
     }
 
     internal static class ExtensionMy
